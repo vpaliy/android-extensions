@@ -7,16 +7,20 @@ android {
     buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.vpaliy.extensions"
-        minSdkVersion 21
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
     implementation project(":android-extensions-log")
+    implementation project(":android-extensions-common")
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"

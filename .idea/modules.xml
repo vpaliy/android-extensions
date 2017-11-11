@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Extensions.iml" filepath="$PROJECT_DIR$/Extensions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-extensions-common/android-extensions-common.iml" filepath="$PROJECT_DIR$/android-extensions-common/android-extensions-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-extensions-log/android-extensions-log.iml" filepath="$PROJECT_DIR$/android-extensions-log/android-extensions-log.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
