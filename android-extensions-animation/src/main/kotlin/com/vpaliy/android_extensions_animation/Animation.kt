@@ -36,17 +36,18 @@ fun ViewPropertyAnimator.scaleBy(factor:Float)=apply {
     scaleYBy(factor)
 }
 
-fun ViewPropertyAnimator.translation(factor:Float)=apply {
-    translationY(factor)
-    translationX(factor)
+fun ViewPropertyAnimator.translation(distance:Float)=apply {
+    translationY(distance)
+    translationX(distance)
 }
 
-fun ViewPropertyAnimator.translationBy(factor:Float)=apply {
-    translationXBy(factor)
-    translationYBy(factor)
+fun ViewPropertyAnimator.translationBy(distance:Float)=apply {
+    translationXBy(distance)
+    translationYBy(distance)
 }
 
-inline fun View.animator(build:ViewPropertyAnimator.()->Unit)=animate().apply(build)
+inline fun View.animator(build:ViewPropertyAnimator.()->Unit)
+        :ViewPropertyAnimator =animate().apply(build)
 
 inline fun ViewPropertyAnimator.scale(factor:()->Float)=scale(factor())
 
