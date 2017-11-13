@@ -25,3 +25,5 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
+apply from: 'javadoc.gradle'

@@ -1,1 +1,4 @@
-include ':app', ':android-extensions-log', ':android-extensions-common', ':android-extensions-animation'
+include ':app'
+include ':android-extensions-log'
+include ':android-extensions-common'
+include ':android-extensions-animation'
