@@ -12,5 +12,4 @@ apply plugin: 'kotlin'
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
-
-apply plugin: 'maven'
+apply plugin: 'com.github.dcendents.android-maven'

@@ -23,5 +23,5 @@ dependencies {
 repositories {
     mavenCentral()
 }
-
+apply plugin: 'com.github.dcendents.android-maven'
 apply from: 'javadoc.gradle'
