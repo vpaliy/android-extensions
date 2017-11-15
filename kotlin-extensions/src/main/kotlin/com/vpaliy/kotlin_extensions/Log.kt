@@ -2,6 +2,7 @@ package com.vpaliy.kotlin_extensions
 
 import android.util.Log
 
+
 fun Any.debug(message:Any?, tag:String=this.javaClass.name){
     Log.d(tag,message.toString())
 }

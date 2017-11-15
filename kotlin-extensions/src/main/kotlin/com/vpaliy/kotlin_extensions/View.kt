@@ -14,6 +14,30 @@ fun View.scale(factor:Float)=apply {
     scaleX=factor
 }
 
+fun View.hide(isGone:Boolean=false){
+    visibility=isGone then View.GONE?:View.INVISIBLE
+}
+
+fun View.show(){
+    visibility=View.VISIBLE
+}
+
+fun View.setHeight(height:Int){
+    layoutParams.height=height
+    requestLayout()
+}
+
+fun View.setWidth(width:Int){
+    layoutParams.width=width
+    requestLayout()
+}
+
+fun View.setSize(height: Int, width: Int){
+    layoutParams.width=width
+    layoutParams.height=height
+    requestLayout()
+}
+
 fun View.getDimension(@DimenRes id:Int)=resources.getDimension(id)
 
 fun View.getDimensionPixelOffset(@DimenRes id:Int)=resources.getDimensionPixelOffset(id)
@@ -32,4 +56,3 @@ inline fun View.click(crossinline callback:(View)->Unit)
 
 inline fun View.longClick(crossinline callback: (View) -> Boolean)
         =setOnLongClickListener{ callback(it) }
-
