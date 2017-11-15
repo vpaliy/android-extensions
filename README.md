@@ -37,3 +37,46 @@ You just need to pass the end height/width.
     interpolator=AccelerateInterpolator()
  }.start()
 ```
+
+## Common Extensions ##
+
+1. Eliminate the tedious "if" problem in Kotlin.
+
+```kotlin
+val condition=...
+val result=if(condition) 1 else 0
+```
+Here's a better way to do this:
+
+```kotlin
+ val condition=...
+ val result=condition then 1?:0
+```
+
+2. If you need to check a parameter for null and then pass it into a function:
+
+```kotlin
+fun requestItem(id:String?):Int{
+   if(id!=null){
+      return fetch(id)
+   }
+   return error()
+}
+```
+A bit better:
+```kotlin
+fun request(id:String?)=id then(this::fetch)?:error()
+```
+Add an exception:
+```kotlin
+fun requestItem(id:String?):Int{
+   if(id!=null){
+      return fetch(id)
+   }
+   throw IllegalArgumentException()
+}
+```
+
+```kotlin
+fun request(id:String?)=id then(this::fetch)?:throw IllegalArgumentException()
+```
