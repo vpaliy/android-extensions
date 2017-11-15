@@ -100,6 +100,7 @@ dependencies {
 ```
 
 
+## License ##
 
 ``````
 MIT License
