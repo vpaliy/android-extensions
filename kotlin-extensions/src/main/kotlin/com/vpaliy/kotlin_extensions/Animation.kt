@@ -1,4 +1,4 @@
-package com.vpaliy.android_extensions_animation
+package com.vpaliy.kotlin_extensions
 
 import android.animation.ValueAnimator
 import android.view.View

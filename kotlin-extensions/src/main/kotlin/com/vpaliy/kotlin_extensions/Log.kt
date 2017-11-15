@@ -1,4 +1,4 @@
-package com.vpaliy.android_extensions_log
+package com.vpaliy.kotlin_extensions
 
 import android.util.Log
 

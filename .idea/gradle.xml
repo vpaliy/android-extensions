@@ -8,10 +8,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/android-extensions-animation" />
-            <option value="$PROJECT_DIR$/android-extensions-common" />
-            <option value="$PROJECT_DIR$/android-extensions-log" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/kotlin-extensions" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

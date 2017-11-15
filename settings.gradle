@@ -1,4 +1,1 @@
-include ':app'
-include ':android-extensions-log'
-include ':android-extensions-common'
-include ':android-extensions-animation'
+include ':app', ':kotlin-extensions'
