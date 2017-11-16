@@ -50,6 +50,30 @@ fun Any.verbose(tag:String, message: Any?)=apply{
     Log.v(tag,message.toString())
 }
 
+fun Any.debug(context:Any, message:Any?)=apply {
+    Log.d(context.tag,message.toString())
+}
+
+fun Any.error(context:Any, message: Any?)=apply {
+    Log.e(context.tag,message.toString())
+}
+
+fun Any.wtf(context:Any, message:Any?)=apply{
+    Log.wtf(context.tag,message.toString())
+}
+
+fun Any.warning(context:Any, message: Any?)=apply{
+    Log.w(context.tag,message.toString())
+}
+
+fun Any.info(context:Any, message: Any?)=apply{
+    Log.i(context.tag,message.toString())
+}
+
+fun Any.verbose(context:Any, message: Any?)=apply{
+    Log.v(context.tag,message.toString())
+}
+
 inline fun Any.debug(message:()->Any?)=debug(message())
 
 inline fun Any.error(message:()-> Any?)=error(message())
@@ -74,5 +98,20 @@ inline fun Any.info(tag:String, message:()-> Any?)=info(tag,message())
 
 inline fun Any.verbose(tag:String, message:()->Any?)=verbose(tag,message())
 
+fun Any.debug(context:Any, message:()->Any?)=debug(context.tag,message())
+
+fun Any.error(context:Any, message:()-> Any?)=error(context.tag,message())
+
+fun Any.wtf(context:Any, message:()->Any?)=wtf(context.tag,message())
+
+fun Any.warning(context:Any, message:()->Any?)=warning(context.tag,message())
+
+fun Any.info(context:Any, message:()-> Any?)=info(context.tag,message())
+
+fun Any.verbose(context:Any, message:()->Any?)=verbose(context.tag,message())
+
 private val Any.tag
     get() = javaClass.simpleName
+
+
+
