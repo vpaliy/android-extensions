@@ -81,6 +81,93 @@ fun requestItem(id:String?):Int{
 fun request(id:String?)=id then(this::fetch)?:throw IllegalArgumentException()
 ```
 
+## Logs ##
+
+
+ - Equivalent of ` Log.i(javaClass.simpleName,message)`
+   
+   ```kotlin
+   val list:List<User> =fetchData()
+   list.forEach{ info(it) }
+   ```
+ - Equivalent of `Log.e(javaClass.simpleName,message)`
+   
+   ```kotlin
+   val list:List<User> =fetchData()
+   list.forEach{ error(it) }
+   ```
+ - Equivalent of `Log.d(javaClass.simpleName,message)`
+   
+   ```kotlin
+   val list:List<User> =fetchData()
+   list.forEach{ debug(it) }
+   ```
+ - Equivalent of `Log.wtf(javaClass.simpleName,message)`
+   
+   ```kotlin
+   val list:List<User> =fetchData()
+   list.forEach{ wtf(it) }
+   ```
+   
+ - Equivalent of `Log.v(javaClass.simpleName,message)`
+   
+   ```kotlin
+   val list:List<User> =fetchData()
+   list.forEach{ verbose(it) }
+   ```
+ - Equivalent of `Log.w(javaClass.simpleName,message)`
+   
+   ```kotlin
+   val list:List<User> =fetchData()
+   list.forEach{ warning(it) }
+   ```
+Assign you own tags:
+
+```kotlin
+ error(tag="Tag",message)
+```
+Or you use tags from the context:
+
+```kotlin
+ repository.requestItem(object:Callback{
+    override fun onSuccess(item: Item) {
+        info(this@MainActivity,item)
+    }
+
+    override fun onError(ex: Throwable) {
+        error(this@MainActivity,ex)
+    }
+ })
+```
+The output would be: `MainActivity: message`
+
+
+Also, you can use a function that will provide a message.Consider this example:
+
+```kotlin
+  repository.requestItem(object:Callback{
+     override fun onSuccess(item: Person) {
+        warning(this@MainActivity){
+            "He is ${item.age} years old"
+        }
+     }
+
+     override fun onError(ex: Throwable) {
+         error(this@MainActivity){
+             ex.cause
+         }
+     }
+  })
+```
+
+Also, you can chain log calls:
+
+```kotlin
+  list.forEach{
+    info(it).warning(it).error(it)
+  }
+```
+
 ## Installation ##
 
 
