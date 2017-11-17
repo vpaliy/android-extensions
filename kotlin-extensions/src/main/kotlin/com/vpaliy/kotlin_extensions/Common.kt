@@ -1,5 +1,17 @@
 package com.vpaliy.kotlin_extensions
 
+import kotlin.reflect.KClass
+
+internal fun <T : Any> KClass<T>.createInstance(): T {
+    val noArgConstructor = constructors.find {
+        it.parameters.isEmpty()
+    }
+    noArgConstructor ?: throw IllegalArgumentException(
+            "Class must have a no-argument constructor")
+
+    return noArgConstructor.call()
+}
+
 infix fun<T> Boolean.then(value:T?)
         =if(this) value else null
 

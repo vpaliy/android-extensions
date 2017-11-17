@@ -1,5 +1,7 @@
 package com.vpaliy.kotlin_extensions
 
+import android.animation.Animator
+import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.view.View
 import android.view.ViewPropertyAnimator
@@ -45,6 +47,19 @@ fun ViewPropertyAnimator.translationBy(distance:Float)=apply {
     translationXBy(distance)
     translationYBy(distance)
 }
+
+fun AnimatorSet.playWith(vararg items:Animator)=apply {
+    playTogether(items.toMutableList())
+}
+
+fun Animator.playWith(animator: Animator): Animator {
+    if(animator is AnimatorSet)
+        return animator.playWith(this)
+    else if(this is AnimatorSet)
+        return this.playWith(animator)
+    return AnimatorSet().playWith(this,animator)
+}
+
 
 inline fun View.animator(build:ViewPropertyAnimator.()->Unit)
         :ViewPropertyAnimator =animate().apply(build)

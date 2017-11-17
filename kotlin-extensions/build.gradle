@@ -19,9 +19,12 @@ android {
 dependencies {
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }
 repositories {
     mavenCentral()
 }
 apply plugin: 'com.github.dcendents.android-maven'
 apply from: 'javadoc.gradle'
+buildscript {
+}
