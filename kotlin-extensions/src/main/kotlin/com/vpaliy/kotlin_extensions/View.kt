@@ -42,6 +42,10 @@ fun View.endX()=width+x
 
 fun View.endY()=height+y
 
+fun View.halfWidth()=width/2
+
+fun View.halfHeight()=height/2
+
 fun View.getDimension(@DimenRes id:Int)=resources.getDimension(id)
 
 fun View.getDimensionPixelOffset(@DimenRes id:Int)=resources.getDimensionPixelOffset(id)
