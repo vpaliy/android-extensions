@@ -38,6 +38,10 @@ fun View.setSize(height: Int, width: Int){
     requestLayout()
 }
 
+fun View.endX()=width+x
+
+fun View.endY()=height+y
+
 fun View.getDimension(@DimenRes id:Int)=resources.getDimension(id)
 
 fun View.getDimensionPixelOffset(@DimenRes id:Int)=resources.getDimensionPixelOffset(id)
