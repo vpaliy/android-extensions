@@ -37,6 +37,31 @@ You just need to pass the end height/width.
     interpolator=AccelerateInterpolator()
  }.start()
 ```
+5. Adding listeners is easier:
+```kotlin
+  view.animator().onStart{}.onEnd{}.onCancel{}.onRepeat{}.animator().apply{
+      duration=300
+      startDelay=50
+      scale(0.5f)
+  }.start()
+```
+Note! You don't want to use the listeners in the `apply{}` block. It will create a new listener each time, without preserving the previous listeners.
+
+**Don't do that:**
+```kotlin
+  view.animator().apply{
+     onEnd{}
+     onStart{}
+  }.start()
+```
+**Or this**:
+```kotlin
+  view.animator().apply{
+     onStart{
+        onEnd{}
+     }   
+   }.start()
+```
 
 ## Common Extensions ##
 
