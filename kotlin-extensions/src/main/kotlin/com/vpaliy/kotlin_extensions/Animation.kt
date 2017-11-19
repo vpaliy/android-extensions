@@ -72,18 +72,29 @@ inline fun ViewPropertyAnimator.translation(factor: () -> Float)=translation(fac
 
 inline fun ViewPropertyAnimator.translationBy(factor: () -> Float)=translationBy(factor())
 
-fun Animator.onEnd(callback:(Animator?)->Unit)=Keeper(this).onEnd(callback)
+fun Animator.onEnd(callback:(Animator?)->Unit)=keeper().onEnd(callback)
 
-fun Animator.onStart(callback:(Animator?)->Unit)=Keeper(this).onStart(callback)
+fun Animator.onStart(callback:(Animator?)->Unit)=keeper().onStart(callback)
 
-fun Animator.onCancel(callback:(Animator?)->Unit)=Keeper(this).onCancel(callback)
+fun Animator.onCancel(callback:(Animator?)->Unit)=keeper().onCancel(callback)
 
-fun Animator.onRepeat(callback:(Animator?)->Unit)=Keeper(this).onRepeat(callback)
+fun Animator.onRepeat(callback:(Animator?)->Unit)=keeper().onRepeat(callback)
 
-class Keeper(private val animator:Animator){
+fun ViewPropertyAnimator.onEnd(callback: (Animator?) -> Unit)=keeper().onEnd(callback)
+
+fun ViewPropertyAnimator.onStart(callback: (Animator?) -> Unit)=keeper().onStart(callback)
+
+fun ViewPropertyAnimator.onRepeat(callback: (Animator?) -> Unit)=keeper().onRepeat(callback)
+
+fun ViewPropertyAnimator.onCancel(callback: (Animator?) -> Unit)=keeper().onCancel(callback)
+
+abstract class AbstractKeeper<T>(protected val target:T){
     private val executor=ListenerExecutor()
 
-    init { animator.addListener(executor) }
+    init {
+        @Suppress("LeakingThis")
+        hookUp(listener = executor)
+    }
 
     fun onEnd(callback:(Animator?) -> Unit)=apply {
         executor.end=callback
@@ -101,9 +112,30 @@ class Keeper(private val animator:Animator){
         executor.repeat=callback
     }
 
-    fun animator()=animator
+    fun animator()=target
+
+    internal abstract fun hookUp(listener:Animator.AnimatorListener)
 }
 
+private fun ViewPropertyAnimator.keeper():AbstractKeeper<ViewPropertyAnimator>
+        =PropertyKeeper(this)
+
+private fun Animator.keeper():AbstractKeeper<Animator>
+        =AnimatorKeeper(this)
+
+private class PropertyKeeper(target:ViewPropertyAnimator)
+    :AbstractKeeper<ViewPropertyAnimator>(target){
+    override fun hookUp(listener: Animator.AnimatorListener) {
+        target.setListener(listener)
+    }
+}
+
+private class AnimatorKeeper(target:Animator)
+    :AbstractKeeper<Animator>(target){
+    override fun hookUp(listener: Animator.AnimatorListener) {
+        target.addListener(listener)
+    }
+}
 
 private class ListenerExecutor:Animator.AnimatorListener {
     var end:((Animator?) -> Unit)? = null
@@ -127,6 +159,3 @@ private class ListenerExecutor:Animator.AnimatorListener {
         start?.invoke(animation)
     }
 }
-
-
-
