@@ -11,5 +11,3 @@ fun Fragment.getDimensionPixelOffset(@DimenRes id:Int)
 
 fun Fragment.getDimensionPixelSize(@DimenRes id:Int)
         =resources.getDimensionPixelSize(id)
-
-

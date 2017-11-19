@@ -80,6 +80,8 @@ fun Animator.onCancel(callback:(Animator?)->Unit)=keeper().onCancel(callback)
 
 fun Animator.onRepeat(callback:(Animator?)->Unit)=keeper().onRepeat(callback)
 
+fun Animator.onUpdate(callback: (ValueAnimator?) -> Unit)=keeper().onUpdate(callback)
+
 fun ViewPropertyAnimator.onEnd(callback: (Animator?) -> Unit)=keeper().onEnd(callback)
 
 fun ViewPropertyAnimator.onStart(callback: (Animator?) -> Unit)=keeper().onStart(callback)
@@ -87,6 +89,8 @@ fun ViewPropertyAnimator.onStart(callback: (Animator?) -> Unit)=keeper().onStart
 fun ViewPropertyAnimator.onRepeat(callback: (Animator?) -> Unit)=keeper().onRepeat(callback)
 
 fun ViewPropertyAnimator.onCancel(callback: (Animator?) -> Unit)=keeper().onCancel(callback)
+
+fun ViewPropertyAnimator.onUpdate(callback: (ValueAnimator?) -> Unit)=keeper().onUpdate(callback)
 
 abstract class AbstractKeeper<T>(protected val target:T){
     private val executor=ListenerExecutor()
@@ -110,6 +114,10 @@ abstract class AbstractKeeper<T>(protected val target:T){
 
     fun onRepeat(callback: (Animator?) -> Unit)=apply {
         executor.repeat=callback
+    }
+
+    fun onUpdate(callback: (ValueAnimator?) -> Unit)=apply {
+        executor.update=callback
     }
 
     fun animator()=target
@@ -137,11 +145,13 @@ private class AnimatorKeeper(target:Animator)
     }
 }
 
-private class ListenerExecutor:Animator.AnimatorListener {
+private class ListenerExecutor:Animator.AnimatorListener,
+        ValueAnimator.AnimatorUpdateListener {
     var end:((Animator?) -> Unit)? = null
     var start: ((Animator?) ->Unit)? = null
     var cancel:((Animator?)->Unit)?=null
     var repeat:((Animator?)->Unit)?=null
+    var update:((ValueAnimator?)->Unit)?=null
 
     override fun onAnimationCancel(animation: Animator?) {
         cancel?.invoke(animation)
@@ -157,5 +167,9 @@ private class ListenerExecutor:Animator.AnimatorListener {
 
     override fun onAnimationStart(animation: Animator?) {
         start?.invoke(animation)
+    }
+
+    override fun onAnimationUpdate(animator: ValueAnimator?) {
+        update?.invoke(animator)
     }
 }
