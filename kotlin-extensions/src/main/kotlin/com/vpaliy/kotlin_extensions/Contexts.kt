@@ -1,6 +1,7 @@
 package com.vpaliy.kotlin_extensions
 
 import android.content.Context
+import android.content.res.Configuration
 import android.support.annotation.ColorRes
 import android.support.annotation.DimenRes
 import android.support.annotation.DrawableRes
@@ -23,3 +24,7 @@ fun Context.getDimensionPixelOffset(@DimenRes id:Int)
 
 fun Context.getDimensionPixelSize(@DimenRes id:Int)
         =resources.getDimensionPixelSize(id)
+
+fun Context.isLandscape()=resources.configuration.orientation== Configuration.ORIENTATION_LANDSCAPE
+
+fun Context.isPortrait()=resources.configuration.orientation==Configuration.ORIENTATION_PORTRAIT
