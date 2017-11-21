@@ -5,9 +5,12 @@ import android.support.annotation.DimenRes
 import android.support.annotation.DrawableRes
 import android.support.annotation.LayoutRes
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewCompat
+import android.support.v4.widget.SwipeRefreshLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 
 fun View.scale(factor:Float)=apply {
     scaleY=factor
@@ -46,6 +49,8 @@ fun View.halfWidth()=width/2
 
 fun View.halfHeight()=height/2
 
+fun View.getMinHeight()= ViewCompat.getMinimumHeight(this)
+
 fun View.getDimension(@DimenRes id:Int)=resources.getDimension(id)
 
 fun View.getDimensionPixelOffset(@DimenRes id:Int)=resources.getDimensionPixelOffset(id)
@@ -64,3 +69,16 @@ inline fun View.click(crossinline callback:(View)->Unit)
 
 inline fun View.longClick(crossinline callback: (View) -> Boolean)
         =setOnLongClickListener{ callback(it) }
+
+fun SwipeRefreshLayout.turnOff()=setOnRefreshListener { isRefreshing=false }
+
+inline fun View.addTemporaryOnPreDraw(crossinline callback:()->Unit){
+    viewTreeObserver.addOnPreDrawListener(object: ViewTreeObserver.OnPreDrawListener{
+        override fun onPreDraw(): Boolean {
+            viewTreeObserver.removeOnPreDrawListener(this)
+            callback()
+            return true
+        }
+    })
+}
+
